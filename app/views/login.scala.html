@@ -1,0 +1,69 @@
+@* login2 Template File *@
+@()(implicit req: play.api.mvc.RequestHeader)
+
+@main("Login"){
+<div class="w-100 text-center position-absolute top-50 start-50 translate-middle">
+        <form style="max-width:580px;margin:auto;" class="shadow border mb-4 needs-validation" id="loginForm" novalidate>
+                <h1 class="mb-4 mt-3">Please sign in</h1>
+                <p id="flashMessage"> </p>
+                <input type="hidden" id="csrfToken" value="@helper.CSRF.getToken.value">
+                <input type="text" id="usernameInput" class="w-75 m-auto form-control" placeholder="username"  required autofocus>
+                <input type="text" id="passwordInput" class="mt-4 w-75 m-auto form-control" placeholder="password"  required autofocus>
+                <div class="mt-4">
+                    <input type="submit" class="mb-3 btn btn-primary btn-lg w-75" value="Sign-in">
+                </div>
+        </form>
+
+        <span>or sign up </span>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-sm btn-secondary" data-bs-toggle="modal" data-bs-target="#userRegistration">
+                registration
+        </button>
+
+
+
+
+
+
+
+</div>
+
+<!-- Modal -->
+
+<div class="modal fade " id="userRegistration" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog ">
+                <div class="modal-content">
+                        <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Registration</h5>
+
+
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                                <div class="text-center">
+
+
+                                        <form id="registrationForm" class="needs-validation" style="margin:auto;" novalidate>
+                                                        <input id="usernameRegistrationInput" type="text"  class="w-75 m-auto form-control " placeholder="username" required autofocus>
+                                                        <input id="passwordRegistrationInput" type="text"  class="w-75 m-auto form-control mt-4" placeholder="password" required autofocus>
+
+
+                                </div>
+                        </div>
+                        <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <input form="registrationForm"  class="btn btn-primary"  type="submit" value="Sign up">
+
+                        </div>
+                </div>
+        </div>
+</div>
+
+<input type="hidden" id="checkInUserRoute" value="@routes.LoginController.checkInUser">
+<input type="hidden" id="registerUserRoute" value="@routes.LoginController.registerUser">
+
+@helper.javascriptRouter("jsRoutes")(routes.javascript.LoginController.checkInUser)
+<script src="@routes.Assets.versioned("javascripts/login.js")" type="text/javascript"></script>
+
+}
+
